@@ -1,18 +1,11 @@
+import uol from "../assets/uol.png";
+
 function Navbar() {
   return (
-    <nav style={{
-      backgroundColor: '#333333',
-      position: 'fixed',
-      top: 0,
-      width: '100%',
-      height: '7px', // mudar para 70 depois
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      }}
-      className="text-center">
-      <div>
-        <h3 style={{ color: 'white' }}>UOL</h3>
+    <nav className="bg-background-nav border-gray-200 dark:border-gray-600 dark:bg-gray-900 text-center h-20"
+    >
+      <div className="flex justify-center items-center h-full">
+        <img src={uol} alt="imagem do uol" width="90px"/>
       </div>
     </nav>
   );

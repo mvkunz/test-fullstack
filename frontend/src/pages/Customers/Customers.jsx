@@ -1,11 +1,9 @@
-import Navbar from "./Navbar";
 import { NavLink } from 'react-router-dom';
 // import Table from "./Table";
 
 function ListClients(){
   return(
     <div>
-      <Navbar />
       <h1>Painel de clientes</h1>
       <h1 className="text-3xl font-bold underline">
       Hello world!
