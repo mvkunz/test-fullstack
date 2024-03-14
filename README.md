@@ -39,3 +39,4 @@ Adote boas práticas de desenvolvimento e arquitetura.
 ## Instruções Finais:
 
 Após concluir o desafio, crie um pull request neste repositório com duas pastas separadas: uma contendo o projeto frontend e outra com o projeto backend, para que possamos avaliar seu trabalho. Boa sorte!
+//
