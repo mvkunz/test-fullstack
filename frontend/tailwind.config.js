@@ -12,6 +12,8 @@ export default {
         'gray-text': '#BDBDBD',
         'gray-dark': '#767C82',
         'background-nav': '#333333',
+        'gray-list': '#6B737B',
+        'gray-customers': '#8E8E8E',
       }
     },
   },

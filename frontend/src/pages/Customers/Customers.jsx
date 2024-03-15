@@ -1,27 +1,55 @@
-import { NavLink } from 'react-router-dom';
-// import Table from "./Table";
+import Button from "../../components/Button";
+import BaseTitle from "../../components/BaseTitle";
+import Table from '../../components/Table';
 
-function ListClients(){
-  return(
-    <div>
-      <h1>Painel de clientes</h1>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-      <div>
-        <h5>Listagem de usuários</h5>
-        <p>Escolha um cliente para visualizar os detalhes</p>
-        <button
-          type="button"
-          className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
-          <NavLink to='/clients/create'>
-            Novo cliente
-          </NavLink>
-        </button>
+function Customers() {
+  return (
+    <div className="ml-40 flex flex-col" style={{ marginTop: "100px" }}>
+      <BaseTitle />
+      <div className="mt-5 flex justify-between items-center">
+        <div>
+          <h1 className="text-gray-list">Listagem de usuários</h1>
+          <p className='text-gray-text'>Escolha um cliente para visualizar os detalhes</p>
+        </div>
+        <div style={{ marginRight: "250px" }}>
+          <Button to='/customers/create' text='Novo cliente' initialColor="custom-orange"/>
+        </div>
       </div>
-      {/* <Table /> */}
+      <Table customers={[{
+        id: 1,
+        name: 'Fulano',
+        cpf: '123.456.789-00',
+        email: 'ola@teste.com',
+        telefone: '1234568',
+        status: 'ACTIVE'
+      },
+      {
+        id: 2,
+        name: 'Ciclano',
+        cpf: '123.456.789-00',
+        email: 'ola@teste.com',
+        telefone: '1234568',
+        status: 'INACTIVE',
+      },
+      {
+        id: 3,
+        name: 'Beltrano',
+        cpf: '123.456.789-00',
+        email: 'ola@teste.com',
+        telefone: '1234568',
+        status: 'PENDING',
+      },
+      {
+        id: 3,
+        name: 'Beltrano',
+        cpf: '123.456.789-00',
+        email: 'ola@teste.com',
+        telefone: '1234568',
+        status: 'DISABLED',
+      }
+      ]} />
     </div>
   )
 }
 
-export default ListClients;
+export default Customers;
