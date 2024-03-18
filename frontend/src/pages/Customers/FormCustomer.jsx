@@ -4,49 +4,73 @@ import BaseTitle from "../../components/BaseTitle";
 import Button from "../../components/Button";
 import BaseInput from "../../components/BaseInput";
 import DropdownStatus from "../../components/DropdownStatus";
+import OrangeButton from "../../components/OrangeButton";
 
 function FormCustomer() {
   const navigate = useNavigate();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [formCompleted, setFormCompleted] = useState([]);
   const [formData, setFormData] = useState({
-    nome: '',
+    name: '',
     email: '',
     cpf: '',
-    telefone: '',
+    phone: '',
+    status: '',
   });
 
-  const handleChange = (event) => {
+  const handleChangeInput = (event) => {
+    console.log(event.target.name);
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5173/customers/create', {
+      const response = await fetch('http://localhost:3000/api/v1/customers', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
         throw new Error('Erro ao registrar. Tente novamente.')
       }
+      // if (response.ok) {
+      //   setFormData({
+      //     name: formData.name,
+      //     email: formData.email,
+      //     cpf: formData.cpf,
+      //     phone: formData.phone,
+      //     status: formData.status,
+      //   });
+    // }
+      setFormCompleted([...formCompleted, formData])
       setFormData({
-        nome: '',
+        name: '',
         email: '',
         cpf: '',
-        telefone: '',
-      });
+        phone: '',
+        status: '',
+      })
       alert('Cliente registrado com sucesso!')
-      navigate('/clients');
+      navigate('/customers');
     } catch (error) {
       console.error('Erro ao registrar: ', error)
     }
+  }
+
+  const setStatus = (status) => {
+    setFormData({
+      ...formData,
+      status,
+    });
   }
 
   return (
@@ -55,17 +79,45 @@ function FormCustomer() {
       <h4 className="mb-2 font-bold text-gray-dark">Novo usuário</h4>
       <p className="mb-10 text-gray-text">Informe os campos a seguir para criar novo usuário:</p>
       <form onSubmit={handleSubmit}>
-        <BaseInput type="text" id="nome" placeholder="Nome" value={formData.nome} onChange={handleChange} />
-        <BaseInput type="email" id="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-        <BaseInput type="text" id="cpf" placeholder="CPF" value={formData.cpf} onChange={handleChange} />
-        <BaseInput type="text" id="telefone" placeholder="Telefone" value={formData.telefone} onChange={handleChange} />
+        <BaseInput 
+          type="text"
+          id="name"
+          placeholder="Nome"
+          value={formData.name}
+          name="name"
+          onChange={handleChangeInput}
+        />
+        <BaseInput
+          type="email"
+          id="email"
+          placeholder="Email"
+          value={formData.email}
+          name="email"
+          onChange={handleChangeInput}
+        />
+        <BaseInput
+          type="number"
+          id="cpf"
+          placeholder="CPF"
+          value={formData.cpf}
+          name="cpf"
+          onChange={handleChangeInput}
+        />
+        <BaseInput
+          type="number"
+          id="phone"
+          placeholder="Telefone"
+          value={formData.phone}
+          name="phone"
+          onChange={handleChangeInput}
+        />
         <div className="mb-3 relative">
-          <DropdownStatus status={formData.status} setStatus={setFormData} isOpen={isOpen} setIsOpen={setIsOpen} />
+          <DropdownStatus status={formData.status} setStatus={setStatus} />
         </div>
-        <div className="mb-6">
-          <Button to='/customers/list' text='Criar' initialColor="custom-orange"/>
-          <Button to='/customers/list' text='Voltar' />
-        </div>
+      <div className="mb-6" style={{ display: "flex", gap: "5px" }}>
+        <OrangeButton width={"120px"} click={handleSubmit} text='Criar' />
+        <Button width={"120px"} to='/customers' text='Voltar' />
+      </div>
       </form>
     </div>
   )

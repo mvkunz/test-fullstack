@@ -2,40 +2,37 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-function Button({ to, text, initialColor }) {
+function OrangeButton({ to, text, width }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [currentColor, setCurrentColor] = useState(initialColor || 'custom-orange');
-
-  console.log(currentColor);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    setCurrentColor('custom-orange');
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    setCurrentColor(initialColor || 'custom-orange');
   };
 
   return (
-    <button
-      type="submit"
-      className={`focus:outline-none text-${isHovered ? 'white' : 'custom-orange'} bg-${isHovered ? 'custom-orange' : 'white'} hover:text-${isHovered ? 'white' : 'custom-orange'} hover:bg-${isHovered ? 'white' : 'custom-orange'} border border-${isHovered ? 'custom-orange' : 'white'} focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <NavLink to={to} className="inline-block w-full h-full">
+    <NavLink to={to} className="inline-block" style={{ width: width }}>
+      <button
+        type="submit"
+        style={{ width: "100%" }}
+        className={`focus:outline-none text-custom-orange bg-white border border-custom-orange font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 mt-10 dark:focus:ring-yellow-900
+        ${isHovered ? 'hover:text-white hover:bg-custom-orange hover:border-custom-orange' : 'hover:text-custom-orange hover:bg-white hover:border-custom-orange'}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         {text}
-      </NavLink>
-    </button>
+      </button>
+    </NavLink>
   );
 }
 
-Button.propTypes = {
+OrangeButton.propTypes = {
   to: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  initialColor: PropTypes.oneOf(['custom-orange', 'white']),
+  width: PropTypes.string
 };
 
-export default Button;
+export default OrangeButton;

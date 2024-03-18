@@ -1,8 +1,30 @@
-import Button from "../../components/Button";
+import { useState, useEffect } from 'react';
 import BaseTitle from "../../components/BaseTitle";
 import Table from '../../components/Table';
+import OrangeButton from "../../components/OrangeButton";
 
 function Customers() {
+  const [customers, setCustomers] = useState([]);
+
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/v1/customers');
+        const data = await response.json();
+        setCustomers(data);
+      } catch (error) {
+        console.error('Erro ao buscar clientes: ', error);
+      }
+    };
+
+    fetchCustomers();
+
+    // Clean-up function if needed
+    // return () => {
+    //   cleanup code...
+    // };
+  }, []); // Empty dependency array means this effect runs only once after the initial render
+
   return (
     <div className="ml-40 flex flex-col" style={{ marginTop: "100px" }}>
       <BaseTitle />
@@ -12,44 +34,12 @@ function Customers() {
           <p className='text-gray-text'>Escolha um cliente para visualizar os detalhes</p>
         </div>
         <div style={{ marginRight: "250px" }}>
-          <Button to='/customers/create' text='Novo cliente' initialColor="custom-orange"/>
+          <OrangeButton to='/customers/criar' text='Novo cliente'/>
         </div>
       </div>
-      <Table customers={[{
-        id: 1,
-        name: 'Fulano',
-        cpf: '123.456.789-00',
-        email: 'ola@teste.com',
-        telefone: '1234568',
-        status: 'ACTIVE'
-      },
-      {
-        id: 2,
-        name: 'Ciclano',
-        cpf: '123.456.789-00',
-        email: 'ola@teste.com',
-        telefone: '1234568',
-        status: 'INACTIVE',
-      },
-      {
-        id: 3,
-        name: 'Beltrano',
-        cpf: '123.456.789-00',
-        email: 'ola@teste.com',
-        telefone: '1234568',
-        status: 'PENDING',
-      },
-      {
-        id: 3,
-        name: 'Beltrano',
-        cpf: '123.456.789-00',
-        email: 'ola@teste.com',
-        telefone: '1234568',
-        status: 'DISABLED',
-      }
-      ]} />
+      <Table customers={customers} />
     </div>
-  )
+  );
 }
 
 export default Customers;

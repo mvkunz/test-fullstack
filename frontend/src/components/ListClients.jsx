@@ -12,7 +12,7 @@ function ListClients() {
           <p className='text-gray-text'>Escolha um cliente para visualizar os detalhes</p>
         </div>
         <div style={{ marginRight: "250px" }}>
-          <Button to='/customers/create' text='Novo cliente' />
+          <Button to='/api/v1/customers' text='Novo cliente' />
         </div>
       </div>
       {/* <Table /> */}

@@ -8,7 +8,7 @@ import { DeleteCustomerUseCase } from "../../../useCases/deleteCustomer/DeleteCu
 
 class CustomerController {
   async create(request: Request, response: Response): Promise<Response> {
-    const { name, email, phone } = request.body;
+    const { name, email, phone, cpf, status } = request.body;
 
     const customerRepository = new CustomerRepository();
     const createCustomerUseCase = new CreateCustomerUseCase(customerRepository);
@@ -17,6 +17,8 @@ class CustomerController {
       name,
       email,
       phone,
+      cpf,
+      status,
     });
 
     return response.status(201).send();

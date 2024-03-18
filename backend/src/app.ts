@@ -2,8 +2,11 @@ import express, { Express, Request, Response } from "express";
 import CustomerRoutes from "./modules/customer/infra/http/routes/v1/customerRoutes";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger";
+import cors from "cors";
 
 const app: Express = express();
+
+app.use(cors())
 
 app.use(express.json());
 

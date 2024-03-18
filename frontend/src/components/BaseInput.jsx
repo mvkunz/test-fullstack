@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function BaseInput({ type, id, placeholder, value, onChange }) {
+function BaseInput({ type, id, placeholder, value, onChange, name }) {
   return(
     <div className="mb-6">
       <label htmlFor={ id }
@@ -8,6 +8,7 @@ function BaseInput({ type, id, placeholder, value, onChange }) {
       <input
         type={type}
         id={id}
+        name={name}
         value={value}
         onChange={onChange}
         className="bg-white border border-custom-gray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 h-15 p-2.5"
@@ -22,8 +23,9 @@ BaseInput.propTypes = {
   type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 }
 
 export default BaseInput;

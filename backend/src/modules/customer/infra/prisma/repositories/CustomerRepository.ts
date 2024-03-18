@@ -9,12 +9,14 @@ class CustomerRepository implements ICustomerRepository {
     });
   }
 
-  async create({ name, email, phone }: ICreateClientDTO): Promise<Customer> {
+  async create({ name, email, phone, cpf, status }: ICreateClientDTO): Promise<Customer> {
     return prisma.customer.create({
       data: {
         name,
         email,
         phone,
+        cpf,
+        status,
       },
     });
   }

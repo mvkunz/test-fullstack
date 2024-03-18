@@ -9,10 +9,10 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path='/customers/create' element={ <FormCustomer /> } />
-        <Route path='/customers/edit/:id' element={ <FormCustomer /> } />
-        <Route path='/customers/list' element={ <Customers /> } />
-        {/* <Route path='/customers' element={ <h1>Customers</h1> } /> */}
+        <Route path='/customers/criar' element={ <FormCustomer /> } />
+        <Route path='/customers/:id' element={ <FormCustomer /> } />
+        <Route path='/customers' element={ <Customers /> } />
+        {/* <Route path='/customers' element={ <Customers /> } /> */}
       </Routes>
     </div>
   )
